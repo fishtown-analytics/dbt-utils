@@ -14,6 +14,9 @@
     current_timestamp
 {% endmacro %}
 
+{% macro athena__current_timestamp() %}
+    current_timestamp
+{% endmacro %}
 
 
 {% macro current_timestamp_in_utc() -%}
@@ -35,4 +38,8 @@
 {# redshift should use default instead of postgres #}
 {% macro redshift__current_timestamp_in_utc() %}
     {{ return(dbt_utils.default__current_timestamp_in_utc()) }}
+{% endmacro %}
+
+{% macro athena_current_timestamp_in_utc() %}
+     (current_timestamp at time zone 'utc')
 {% endmacro %}
